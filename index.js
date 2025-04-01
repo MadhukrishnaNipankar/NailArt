@@ -19,18 +19,21 @@ connectDB(CONNECTION_STRING);
 
 // Importing routes
 const userAuthRoutes = require("./Routes/UserAuthRoutes");
+const appointmentRoutes = require("./Routes/AppointmentRoutes");
 const companyRoutes = require("./Routes/CompanyRoutes");
+
 // API Routes
 
 app.use("/api/v1/auth", userAuthRoutes);
+app.use("/api/v1/appointment", appointmentRoutes);
 app.use("/api/v1/companies", companyRoutes);
 
 app.use("/", (req, res) => {
   res.send("Welcome to NailArt");
 });
 // Port setup
-const PORT = process.env.PORT || 5000;
-
+// const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
