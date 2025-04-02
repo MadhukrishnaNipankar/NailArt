@@ -21,12 +21,14 @@ connectDB(CONNECTION_STRING);
 const userAuthRoutes = require("./Routes/UserAuthRoutes");
 const appointmentRoutes = require("./Routes/AppointmentRoutes");
 const companyRoutes = require("./Routes/CompanyRoutes");
+const productRoutes = require("./Routes/ProductRoutes");
 
 // API Routes
 
 app.use("/api/v1/auth", userAuthRoutes);
 app.use("/api/v1/appointment", appointmentRoutes);
 app.use("/api/v1/companies", companyRoutes);
+app.use("/api/v1/products", productRoutes);
 
 app.use("/", (req, res) => {
   res.send("Welcome to NailArt");

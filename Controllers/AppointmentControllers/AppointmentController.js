@@ -199,3 +199,4 @@ exports.getAppointments = async (req, res) => {
     });
   }
 };
+
