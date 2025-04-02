@@ -1,15 +1,16 @@
-import blogs from "../Components/blogs.jsx"
+import Blogs from "../Components/B"
 
 import React from 'react'
 
-function blogPage() {
+function BlogPage() {
   return (
     <div>
-     
-      <blogs/>
+        
+      <h1>Blog Page</h1>
+      <Blogs/>
     
     </div>
   )
 }
 
-export default blogPage
+export default BlogPage

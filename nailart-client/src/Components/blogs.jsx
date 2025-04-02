@@ -34,7 +34,7 @@ const blogs = [
   }
 ];
 
-function BlogGrid() {
+function Blogs() {
   return (
     <Row xs={1} md={2} className="g-4">
       {blogs.map((blog) => (
@@ -53,4 +53,4 @@ function BlogGrid() {
   );
 }
 
-export default BlogGrid;
+export default Blogs;
