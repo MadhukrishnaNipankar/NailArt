@@ -1,79 +1,3 @@
-// import React, { useState } from "react";
-// import Calendar from "react-calendar";
-// import "react-calendar/dist/Calendar.css";
-// import "./Appointment.css";
-// import { FaCalendarAlt } from "react-icons/fa"; // Import calendar icon
-
-// const Appointment = () => {
-//   const [date, setDate] = useState(new Date());
-//   const [time, setTime] = useState("");
-//   const [showCalendar, setShowCalendar] = useState(false);
-
-//   const timeSlots = ["12PM", "2PM", "4PM", "6PM"];
-
-//   const handleDateChange = (newDate) => {
-//     setDate(newDate);
-//     setShowCalendar(false); // Hide calendar after selecting a date
-//   };
-
-//   const handleSubmit = () => {
-//     if (!time) {
-//       alert("Please select a time slot!");
-//       return;
-//     }
-//     alert(`Appointment booked on ${date.toDateString()} at ${time}`);
-//   };
-
-//   return (
-//     <div className="appointment-container">
-//       <div className="appointment-box">
-//         <h2>Book an Appointment</h2>
-
-//         {/* Date Picker Input */}
-//         <div className="date-picker-container">
-//           <input
-//             type="text"
-//             value={date.toDateString()}
-//             readOnly
-//             className="date-input"
-//             onClick={() => setShowCalendar(!showCalendar)}
-//           />
-//           <FaCalendarAlt className="calendar-icon" onClick={() => setShowCalendar(!showCalendar)} />
-//         </div>
-
-//         {/* Calendar (Hidden by default, appears on click) */}
-//         {showCalendar && (
-//           <div className="calendar-popup">
-//             <Calendar onChange={handleDateChange} value={date} />
-//           </div>
-//         )}
-
-//         {/* Time Slot Selection */}
-//         <h3>Select a Time Slot:</h3>
-//         <div className="time-slot-container">
-//           {timeSlots.map((slot) => (
-//             <button
-//               key={slot}
-//               onClick={() => setTime(slot)}
-//               className={`time-slot ${time === slot ? "selected" : ""}`}
-//             >
-//               {slot}
-//             </button>
-//           ))}
-//         </div>
-
-//         {/* Submit Button */}
-//         <button onClick={handleSubmit} className="submit-btn">
-//           Confirm Appointment
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Appointment;
-
-
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -130,9 +54,15 @@ const Appointment = () => {
   };
 
   return (
-        <div className="appointment-container">
+    <div className="appointment-container">
       <div className="appointment-box">
-        <h2>Book an Appointment</h2>
+        <h2
+          style={{
+            color: "rgb(255, 95, 132)",
+          }}
+        >
+          Book an Appointment
+        </h2>
 
         <div className="date-picker-container">
           <input
@@ -160,7 +90,9 @@ const Appointment = () => {
             <button
               key={slot}
               onClick={() => setTime(slot.replace("PM", ""))} // Store numeric value only
-              className={`time-slot ${time === slot.replace("PM", "") ? "selected" : ""}`}
+              className={`time-slot ${
+                time === slot.replace("PM", "") ? "selected" : ""
+              }`}
             >
               {slot}
             </button>
@@ -176,7 +108,6 @@ const Appointment = () => {
         </button>
       </div>
     </div>
-    
   );
 };
 

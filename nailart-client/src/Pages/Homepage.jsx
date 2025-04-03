@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,9 +16,9 @@ const Homepage = () => {
     homepage: {
       fontFamily: "'Arial', sans-serif",
       background: "linear-gradient(135deg, #ffdde1, #ee9ca7)",
-      color: "#333" ,
+      color: "#333",
       minHeight: "100vh",
-      paddingTop:"1rem"
+      paddingTop: "1rem",
     },
 
     hero: {
@@ -99,6 +99,15 @@ const Homepage = () => {
       color: "#e91e63",
     },
   };
+
+  const navigate = useNavigate(); // Initialize navigate
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/login"); // Redirect to /login if no token
+    }
+  }, [navigate]);
 
   // Function to render stars based on rating
   const renderStars = (rating) => {

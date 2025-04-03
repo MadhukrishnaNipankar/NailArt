@@ -2,6 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const authToken = localStorage.getItem("authToken");
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    window.location.reload(); // Refresh the page after logout
+  };
+
   const styles = {
     header: {
       display: "flex",
@@ -31,6 +38,16 @@ const Navbar = () => {
       fontWeight: "300",
       transition: "color 0.3s",
     },
+    logoutButton: {
+      padding: "0.7rem 1rem",
+      background:
+        "linear-gradient(135deg, rgb(255, 133, 162), rgb(255, 64, 129))",
+      color: "#fff",
+      border: "none",
+      borderRadius: "30px",
+      cursor: "pointer",
+      transition: "background 0.3s",
+    },
   };
 
   return (
@@ -46,19 +63,16 @@ const Navbar = () => {
         <Link to="/shop" style={styles.navLink}>
           Shop
         </Link>
-       
-        {/* <Link to="/account" style={styles.navLink}>
-          My Account
-        </Link> */}
         <Link to="/appointment" style={styles.navLink}>
           Appointment
         </Link>
-        <Link to="/cart" style={styles.navLink}>
-          Cart
-        </Link>
-        {/* <Link to="/faq" style={styles.navLink}>
-          FAQ
-        </Link> */}
+
+        {/* Show Logout button only if user is logged in */}
+        {authToken && (
+          <button style={styles.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </nav>
     </header>
   );

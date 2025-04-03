@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ message: "", type: "", show: false });
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +28,11 @@ function Login() {
       } else {
         showAlert("✅ Login Successful! Redirecting...", "success");
         localStorage.setItem("authToken", data.token);
+
+        // Redirect to "/" after 2 seconds
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       }
     } catch (error) {
       showAlert("⚠️ Something went wrong. Please try again.", "error");
