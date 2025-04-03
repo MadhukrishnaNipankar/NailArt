@@ -1,0 +1,107 @@
+/* Appointment Page Styling */
+.appointment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffe6f2; /* Light pink background */
+  }
+  
+  .appointment-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+  }
+  
+  h2 {
+    color: #d63384;
+    margin-bottom: 20px;
+  }
+  
+  /* Date Picker */
+  .date-picker-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .date-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .calendar-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #d63384;
+    cursor: pointer;
+  }
+  
+  .calendar-popup {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  /* Time Slot Buttons */
+  .time-slot-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .time-slot {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .time-slot:hover {
+    background-color: #d63384;
+  }
+  
+  .time-slot.selected {
+    background-color: #d63384;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #d63384;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #c2185b;
+  }
+  
