@@ -184,7 +184,7 @@ function Login() {
               fontWeight: "bold",
             }}
           >
-            Welcome Back to NailArt 💅
+            Welcome Back to NailedIt 💅
           </h2>
         </div>
       </div>

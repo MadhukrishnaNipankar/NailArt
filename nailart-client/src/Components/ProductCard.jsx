@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ name, cost }) => {
+const ProductCard = ({ name, cost,image }) => {
   const styles = {
     cardContainer: {
       display: "flex",
@@ -89,7 +89,8 @@ const ProductCard = ({ name, cost }) => {
       >
         <div style={styles.cardImageContainer}>
           <img
-            src="https://tse4.mm.bing.net/th?id=OIP.5KuwW_NU020ryxpYeHT91wHaHa&rs=1&pid=ImgDetMain"
+            // src="https://tse4.mm.bing.net/th?id=OIP.5KuwW_NU020ryxpYeHT91wHaHa&rs=1&pid=ImgDetMain"
+            src={image}
             alt={name}
             style={styles.cardImage}
           />

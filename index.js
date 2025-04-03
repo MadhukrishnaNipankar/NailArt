@@ -31,7 +31,7 @@ app.use("/api/v1/companies", companyRoutes);
 app.use("/api/v1/products", productRoutes);
 
 app.use("/", (req, res) => {
-  res.send("Welcome to NailArt");
+  res.send("Welcome to NailIt");
 });
 // Port setup
 // const PORT = process.env.PORT || 5000;

@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>NailArt</div>
+      <div style={styles.logo}>NailedIt</div>
       <nav style={styles.nav}>
         <Link to="/" style={styles.navLink}>
           Home

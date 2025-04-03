@@ -55,7 +55,7 @@ exports.bookAppointment = async (req, res) => {
     });
 
     // Prepare email content
-    const adminEmail = "nipankarmadhu@gmail.com"; // Admin Email from .env
+    const adminEmail = "amruta.agarwal@cumminscollege.in"; // Admin Email from .env
     const subject = `New Appointment Booked by ${user.username}`;
     const text = `Dear Admin,\n\nA new appointment has been booked by ${
       user.username
