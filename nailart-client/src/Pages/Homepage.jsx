@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Navbar from "../Components/Navbar";
 
 const Homepage = () => {
   // Inline styles
@@ -17,42 +18,15 @@ const Homepage = () => {
       background: "linear-gradient(135deg, #ffdde1, #ee9ca7)",
       color: "#333",
       margin: 0,
-      padding: 0,
+      padding: "2rem",
       minHeight: "100vh",
     },
-    header: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: "1rem 5%",
-      background: "rgba(255, 255, 255, 0.8)",
-      backdropFilter: "blur(10px)",
-      position: "sticky",
-      top: 0,
-      zIndex: 1000,
-    },
-    logo: {
-      fontSize: "1.5rem",
-      fontWeight: "bold",
-      color: "#e91e63",
-    },
-    nav: {
-      display: "flex",
-      alignItems: "center",
-      gap: "1.5rem",
-    },
-    navLink: {
-      fontSize: "1rem",
-      textDecoration: "none",
-      color: "#333",
-      fontWeight: "500",
-      transition: "color 0.3s",
-    },
+
     hero: {
       textAlign: "center",
       padding: "5rem 2rem",
       background: "rgba(255, 255, 255, 0.7)",
-      margin: "2rem 5%",
+      margin: "0.3rem 5% 2rem 5%",
       borderRadius: "20px",
     },
     heroTitle: {
@@ -192,127 +166,99 @@ const Homepage = () => {
     },
   ];
   return (
-    <div style={styles.homepage}>
-      {/* Header */}
-      <header style={styles.header}>
-        <div style={styles.logo}>NailArt</div>
-        <nav style={styles.nav}>
-          <Link to="/" style={styles.navLink}>
-            Home
+    <>
+      <Navbar />
+      <div style={styles.homepage}>
+        {/* Hero Section */}
+        <section style={styles.hero}>
+          <h1 style={styles.heroTitle}>
+            Transform Your Look with Stunning Nails
+          </h1>
+          <p style={styles.heroText}>
+            Explore our premium press-on nails collection for every occasion.
+          </p>
+          <Link to="/shop" style={styles.btn}>
+            Shop Now
           </Link>
-          <Link to="/shop" style={styles.navLink}>
-            Shop
-          </Link>
-          <Link to="/story" style={styles.navLink}>
-            Our Story
-          </Link>
-          <Link to="/faq" style={styles.navLink}>
-            FAQ
-          </Link>
-          <Link to="/account" style={styles.navLink}>
-            My Account
-          </Link>
-          <Link to="/cart" style={styles.navLink}>
-            Cart
-          </Link>
-          <Link to="/contact" style={styles.navLink}>
-            Contact
-          </Link>
-        </nav>
-      </header>
-
-      {/* Hero Section */}
-      <section style={styles.hero}>
-        <h1 style={styles.heroTitle}>
-          Transform Your Look with Stunning Nails
-        </h1>
-        <p style={styles.heroText}>
-          Explore our premium press-on nails collection for every occasion.
-        </p>
-        <Link to="/shop" style={styles.btn}>
-          Shop Now
-        </Link>
-      </section>
-
-      {/* Product Grid */}
-      <section>
-        <div style={styles.productGrid}>
-          {products.map((product, index) => (
-            <div key={index} style={styles.productCard}>
-              <img
-                src={product.image}
-                alt={product.name}
-                style={styles.productImage}
-              />
-              <h3>{product.name}</h3>
-              <p style={{ color: "#e91e63", fontSize: "1rem" }}>
-                ₹{product.cost}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonial Section */}
-      <section
-        style={{
-          textAlign: "center",
-          margin: "3rem 5%",
-          padding: "2rem",
-          background: "rgba(255, 255, 255, 0.9)",
-          borderRadius: "20px",
-        }}
-      >
-        <h2
-          style={{ color: "#e91e63", fontSize: "2rem", marginBottom: "1rem" }}
+        </section>
+        {/* Product Grid */}
+        <section>
+          <div style={styles.productGrid}>
+            {products.map((product, index) => (
+              <div key={index} style={styles.productCard}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={styles.productImage}
+                />
+                <h3>{product.name}</h3>
+                <p style={{ color: "#e91e63", fontSize: "1rem" }}>
+                  ₹{product.cost}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+        {/* Testimonial Section */}
+        <section
+          style={{
+            textAlign: "center",
+            margin: "3rem 5%",
+            padding: "2rem",
+            background: "rgba(255, 255, 255, 0.9)",
+            borderRadius: "20px",
+          }}
         >
-          What Our Customers Say
-        </h2>
-        <Slider {...sliderSettings}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              style={{
-                padding: "1.5rem",
-                background: "#fff",
-                borderRadius: "10px",
-                boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-                textAlign: "center",
-                maxWidth: "600px",
-                margin: "auto",
-              }}
-            >
-              <p
+          <h2
+            style={{ color: "#e91e63", fontSize: "2rem", marginBottom: "1rem" }}
+          >
+            What Our Customers Say
+          </h2>
+          <Slider {...sliderSettings}>
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
                 style={{
-                  fontSize: "1.2rem",
-                  fontStyle: "italic",
-                  color: "#555",
+                  padding: "1.5rem",
+                  background: "#fff",
+                  borderRadius: "10px",
+                  boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
+                  textAlign: "center",
+                  maxWidth: "600px",
+                  margin: "auto",
                 }}
               >
-                "{testimonial.text}"
-              </p>
-              <p style={styles.testimonialStars}>
-                {renderStars(testimonial.rating)}
-              </p>
-              <p
-                style={{
-                  marginTop: "0.5rem",
-                  fontWeight: "bold",
-                  color: "#e91e63",
-                }}
-              >
-                - {testimonial.author}
-              </p>
-            </div>
-          ))}
-        </Slider>
-      </section>
-
-      {/* Footer */}
-      <footer style={styles.footer}>
-        <p>&copy; 2025 NailArt. All Rights Reserved.</p>
-      </footer>
-    </div>
+                <p
+                  style={{
+                    fontSize: "1.2rem",
+                    fontStyle: "italic",
+                    color: "#555",
+                  }}
+                >
+                  "{testimonial.text}"
+                </p>
+                <p style={styles.testimonialStars}>
+                  {renderStars(testimonial.rating)}
+                </p>
+                <p
+                  style={{
+                    marginTop: "0.5rem",
+                    fontWeight: "bold",
+                    color: "#e91e63",
+                  }}
+                >
+                  - {testimonial.author}
+                </p>
+              </div>
+            ))}
+          </Slider>
+        </section>
+        {/* Footer */}
+        <footer style={styles.footer}>
+          <p>&copy; 2025 NailArt. All Rights Reserved.</p>
+        </footer>
+      </div>
+    </>
   );
 };
 

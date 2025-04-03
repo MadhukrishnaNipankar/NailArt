@@ -9,8 +9,8 @@ import {
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Blogs from "./Pages/Blogs";
-import Navbar1 from "./Components/Navbar1";
 import BlogDetails from "./Pages/BlogDetails";
+import Homepage from "./Pages/Homepage";
 function App() {
   return (
     <Router>
@@ -22,7 +22,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
-          <Route path="/navbar" element={<Navbar1 />} />
+
           <Route path="*" element={<h2>404 - Page Not Found 😢</h2>} />
         </Routes>
       </div>
