@@ -16,10 +16,9 @@ const Homepage = () => {
     homepage: {
       fontFamily: "'Arial', sans-serif",
       background: "linear-gradient(135deg, #ffdde1, #ee9ca7)",
-      color: "#333",
-      margin: 0,
-      padding: "2rem",
+      color: "#333" ,
       minHeight: "100vh",
+      paddingTop:"1rem"
     },
 
     hero: {

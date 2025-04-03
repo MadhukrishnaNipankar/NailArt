@@ -46,15 +46,19 @@ const Navbar = () => {
         <Link to="/story" style={styles.navLink}>
           Shop
         </Link>
-        <Link to="/faq" style={styles.navLink}>
-          FAQ
-        </Link>
-        <Link to="/account" style={styles.navLink}>
+       
+        {/* <Link to="/account" style={styles.navLink}>
           My Account
+        </Link> */}
+        <Link to="/appointment" style={styles.navLink}>
+          Appointment
         </Link>
         <Link to="/cart" style={styles.navLink}>
           Cart
         </Link>
+        {/* <Link to="/faq" style={styles.navLink}>
+          FAQ
+        </Link> */}
       </nav>
     </header>
   );
