@@ -1,6 +1,7 @@
 import React from "react";
 
-const ProductCard = ({ name, cost,image }) => {
+const ProductCard = ({ name, cost, image, handleBuyNow }) => {
+  // Accept handleBuyNow as a prop
   const styles = {
     cardContainer: {
       display: "flex",
@@ -88,12 +89,7 @@ const ProductCard = ({ name, cost,image }) => {
         }}
       >
         <div style={styles.cardImageContainer}>
-          <img
-            // src="https://tse4.mm.bing.net/th?id=OIP.5KuwW_NU020ryxpYeHT91wHaHa&rs=1&pid=ImgDetMain"
-            src={image}
-            alt={name}
-            style={styles.cardImage}
-          />
+          <img src={image} alt={name} style={styles.cardImage} />
           <div style={styles.overlay}></div>
         </div>
         <div style={styles.cardContent}>
@@ -101,6 +97,7 @@ const ProductCard = ({ name, cost,image }) => {
           <p style={styles.cardPrice}>₹{cost}</p>
           <button
             style={styles.buyButton}
+            onClick={() => handleBuyNow({ name, cost, image })} // Call handleBuyNow with product details
             onMouseOver={(e) => {
               e.currentTarget.style.transform = styles.buyButtonHover.transform;
               e.currentTarget.style.background =

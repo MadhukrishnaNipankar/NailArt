@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../Components/ProductCard";
 import Navbar from "../Components/Navbar";
+import Modal from "../Components/Modal"; // Import Modal component
 
 const categories = ["work", "vacation", "nailartsupplies", "festive", "casual"];
 
@@ -10,6 +11,8 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+  const [selectedProduct, setSelectedProduct] = useState(null); // State to store selected product details
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -54,6 +57,12 @@ const Shop = () => {
 
     fetchProducts();
   }, [selectedCategory]);
+
+  const handleBuyNow = (product) => {
+    console.log("Button clicked!"); // Debugging: Check if button click is detected
+    setSelectedProduct(product); // Set selected product details
+    setShowModal(true); // Show the modal
+  };
 
   const styles = {
     shopContainer: {
@@ -171,11 +180,32 @@ const Shop = () => {
                   name={product.name}
                   cost={product.cost}
                   image={product.image}
-                />
+                  handleBuyNow={handleBuyNow}
+                >
+                  <button
+                    onClick={() => handleBuyNow(product)}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Buy Now
+                  </button>
+                </ProductCard>
               ))}
           </div>
         )}
       </div>
+
+      {/* Modal for confirmation */}
+      {showModal && selectedProduct && (
+        <Modal
+          product={selectedProduct}
+          onClose={() => setShowModal(false)}
+          onConfirm={() => {
+            // Handle order confirmation here
+            console.log("Order Confirmed for", selectedProduct);
+            setShowModal(false);
+          }}
+        />
+      )}
     </>
   );
 };
