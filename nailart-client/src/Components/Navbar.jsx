@@ -66,7 +66,9 @@ const Navbar = () => {
         <Link to="/appointment" style={styles.navLink}>
           Appointment
         </Link>
-
+        <Link to="/order" style={styles.navLink}>
+          Orders
+        </Link>
         {/* Show Logout button only if user is logged in */}
         {authToken && (
           <button style={styles.logoutButton} onClick={handleLogout}>
