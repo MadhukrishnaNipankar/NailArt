@@ -173,9 +173,13 @@ exports.bookAppointment = async (req, res) => {
 exports.getAppointments = async (req, res) => {
   try {
     // Fetch all appointments from the database
-    const appointments = await Appointment.find().sort({
+    // const appointments = await Appointment.find().sort({
+    //   dateOfAppointment: 1,
+    // });
+    const appointments = await Appointment.find().populate("user").sort({
       dateOfAppointment: 1,
     });
+    
     // Check if no appointments exist
     if (appointments.length === 0) {
       return res.status(404).json({

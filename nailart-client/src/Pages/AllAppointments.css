@@ -1,0 +1,63 @@
+.appointments-container {
+    padding: 20px;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .loading-text,
+  .error-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .no-appointments {
+    text-align:left;
+    font-size: 1.2rem;
+    color: #777;
+  }
+  
+  .appointments-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .appointment-card {
+    background-color: #ff7aa6;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    padding: 17px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .appointment-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .user-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+  }
+  
+  .user-phone,
+  .appointment-date,
+  .appointment-time,
+  .user-email {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
