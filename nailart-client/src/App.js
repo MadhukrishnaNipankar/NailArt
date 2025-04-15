@@ -13,6 +13,7 @@ import BlogDetails from "./Pages/BlogDetails";
 import Homepage from "./Pages/Homepage";
 import Shop from "./Pages/Shop";
 import AllAppointments from "./Pages/AllAppointments";
+import AllOrders from "./Pages/AllOrders";
 import AppointmentPage from "./Pages/AppointmentPage";
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/all-appointments" element={<AllAppointments />} />
+          <Route path="/all-orders" element={<AllOrders />} />
           <Route path="/appointment" element={<AppointmentPage />} />
           <Route path="*" element={<h2>404 - Page Not Found 😢</h2>} />
         </Routes>

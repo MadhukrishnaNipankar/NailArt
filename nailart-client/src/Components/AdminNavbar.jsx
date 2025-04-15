@@ -52,7 +52,7 @@ const AdminNavbar = () => {
 
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>NailedIt</div>
+      <div style={styles.logo}>NailedIt Admin</div>
       <nav style={styles.nav}>
         <Link to="/all-appointments" style={styles.navLink}>
           Appointments

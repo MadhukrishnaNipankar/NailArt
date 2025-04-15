@@ -1,0 +1,50 @@
+.admin-orders-container {
+    padding: 30px;
+    background-color: #fff0f6;
+    min-height: 100vh;
+  }
+  
+  .admin-orders-container h2 {
+    color: #d63384;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px rgba(214, 51, 132, 0.2);
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 1px solid #ffc2d1;
+  }
+  
+  .orders-table th {
+    background-color: #f8d7e3;
+    color: #880e4f;
+    font-weight: bold;
+  }
+  
+  .orders-table tr:nth-child(even) {
+    background-color: #ffe6ef;
+  }
+  
+  .orders-table tr:hover {
+    background-color: #fce4ec;
+  }
+  
+  .product-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #f8bbd0;
+  }
+  
