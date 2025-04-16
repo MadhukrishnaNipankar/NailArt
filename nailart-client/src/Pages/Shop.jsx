@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../Components/ProductCard";
 import Navbar from "../Components/Navbar";
-import Modal from "../Components/Modal"; // Import Modal component
 
 const categories = ["work", "vacation", "nailartsupplies", "festive", "casual"];
 
@@ -11,15 +10,18 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false); // State to control modal visibility
-  const [selectedProduct, setSelectedProduct] = useState(null); // State to store selected product details
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [orderMessage, setOrderMessage] = useState("");
+  const [orderError, setOrderError] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem("authToken"); // Fetch token from localStorage
+      const token = localStorage.getItem("authToken");
       if (!token) {
         setError("Authorization token not found. Please log in.");
         setLoading(false);
@@ -32,19 +34,18 @@ const Shop = () => {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`, // Use authToken
+              Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
           }
         );
 
         const data = await response.json();
-        console.log(data);
-
         if (data.error) {
           setError(data.errorMessage || "Failed to fetch products.");
           setFilteredProducts([]);
         } else {
+          console.log(data);
           setFilteredProducts(data.data);
         }
       } catch (err) {
@@ -59,9 +60,49 @@ const Shop = () => {
   }, [selectedCategory]);
 
   const handleBuyNow = (product) => {
-    console.log("Button clicked!"); // Debugging: Check if button click is detected
-    setSelectedProduct(product); // Set selected product details
-    setShowModal(true); // Show the modal
+    console.log("handle buy now", product);
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const handleConfirmOrder = async () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      setOrderMessage("Authorization token not found.");
+      return;
+    }
+
+    try {
+      console.log(selectedProduct);
+
+      const res = await fetch("http://localhost:5000/api/v1/order/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          productId: selectedProduct.productId, // Using _id from the selected product
+          shippingAddress: shippingAddress.trim(),
+        }),
+      });
+
+      const data = await res.json();
+      if (data.error) {
+        setOrderMessage("❌ Failed to place order. Please try again.");
+      } else {
+        setOrderMessage(
+          "✅ Order placed successfully! Order ID: " + data.data.orderId
+        );
+        setTimeout(() => {
+          setShowModal(false);
+          setShippingAddress("");
+          setOrderMessage("");
+        }, 2000);
+      }
+    } catch (error) {
+      setOrderMessage("❌ Network error. Please try again.");
+    }
   };
 
   const styles = {
@@ -128,13 +169,55 @@ const Shop = () => {
       fontSize: "1.2rem",
       marginTop: "1rem",
     },
+    modalBackdrop: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: 1000,
+    },
+    modalContainer: {
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "white",
+      padding: "2rem",
+      borderRadius: "10px",
+      boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)",
+      zIndex: 1001,
+      width: "80%",
+      maxWidth: "500px",
+    },
+    button: {
+      padding: "0.8rem 1.5rem",
+      backgroundColor: "rgb(65, 179, 33)",
+      color: "white",
+      border: "none",
+      borderRadius: "5px",
+      cursor: "pointer",
+      marginTop: "1rem",
+      fontSize: "1rem",
+    },
+    closeButton: {
+      marginLeft: "1rem",
+      padding: "0.5rem 1rem",
+      backgroundColor: "rgb(194, 55, 0)",
+      color: "white",
+      border: "none",
+      borderRadius: "5px",
+      cursor: "pointer",
+      marginTop: "1rem",
+      fontSize: "1rem",
+    },
   };
 
   return (
     <>
       <Navbar />
       <div style={styles.shopContainer}>
-        {/* Category Selection */}
         <div style={styles.categoryBar}>
           {categories.map((category) => (
             <button
@@ -152,7 +235,6 @@ const Shop = () => {
           ))}
         </div>
 
-        {/* Search Bar */}
         <input
           type="text"
           placeholder="🔍 Search for the perfect shade..."
@@ -161,13 +243,9 @@ const Shop = () => {
           style={styles.searchBar}
         />
 
-        {/* Show Loading */}
         {loading && <p style={styles.loadingText}>Loading products...</p>}
-
-        {/* Show Error */}
         {error && <p style={styles.errorText}>{error}</p>}
 
-        {/* Product Grid */}
         {!loading && !error && (
           <div style={styles.productGrid}>
             {filteredProducts
@@ -177,34 +255,76 @@ const Shop = () => {
               .map((product) => (
                 <ProductCard
                   key={product._id}
+                  productId={product._id}
                   name={product.name}
                   cost={product.cost}
                   image={product.image}
                   handleBuyNow={handleBuyNow}
-                >
-                  <button
-                    onClick={() => handleBuyNow(product)}
-                    style={{ marginTop: "10px" }}
-                  >
-                    Buy Now
-                  </button>
-                </ProductCard>
+                />
               ))}
           </div>
         )}
       </div>
 
-      {/* Modal for confirmation */}
+      {/* Inline Modal */}
       {showModal && selectedProduct && (
-        <Modal
-          product={selectedProduct}
-          onClose={() => setShowModal(false)}
-          onConfirm={() => {
-            // Handle order confirmation here
-            console.log("Order Confirmed for", selectedProduct);
-            setShowModal(false);
-          }}
-        />
+        <div style={styles.modalBackdrop}>
+          <div style={styles.modalContainer}>
+            <h2>Confirm Your Order</h2>
+            <p>
+              <strong>Product:</strong> {selectedProduct.name}
+            </p>
+            <p>
+              <strong>Cost:</strong> ₹{selectedProduct.cost}
+            </p>
+            <label>
+              <strong>Shipping Address:</strong>
+              <textarea
+                value={shippingAddress}
+                onChange={(e) => setShippingAddress(e.target.value)}
+                placeholder="Enter your address here"
+                style={{
+                  width: "100%",
+                  padding: "0.5rem",
+                  marginTop: "0.5rem",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  fontFamily: "inherit",
+                  fontSize: "1rem",
+                }}
+                rows={3}
+              />
+            </label>
+
+            {orderMessage && (
+              <p
+                style={{
+                  marginTop: "1rem",
+                  color: orderMessage.startsWith("✅") ? "green" : "red",
+                  fontWeight: "bold",
+                }}
+              >
+                {orderMessage}
+              </p>
+            )}
+
+            <div>
+              <button onClick={handleConfirmOrder} style={styles.button}>
+                Confirm Order
+              </button>
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  setShippingAddress("");
+                  setOrderMessage("");
+                }}
+                style={styles.closeButton}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

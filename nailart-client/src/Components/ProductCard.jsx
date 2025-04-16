@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ name, cost, image, handleBuyNow }) => {
+const ProductCard = ({ productId, name, cost, image, handleBuyNow }) => {
   // Accept handleBuyNow as a prop
   const styles = {
     cardContainer: {
@@ -97,7 +97,7 @@ const ProductCard = ({ name, cost, image, handleBuyNow }) => {
           <p style={styles.cardPrice}>₹{cost}</p>
           <button
             style={styles.buyButton}
-            onClick={() => handleBuyNow({ name, cost, image })} // Call handleBuyNow with product details
+            onClick={() => handleBuyNow({ productId, name, cost, image })} // Call handleBuyNow with product details
             onMouseOver={(e) => {
               e.currentTarget.style.transform = styles.buyButtonHover.transform;
               e.currentTarget.style.background =

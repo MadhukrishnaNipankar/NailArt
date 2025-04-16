@@ -48,6 +48,8 @@ const Modal = ({ product, onClose, onConfirm }) => {
     },
   };
 
+  console.log("data from modal", product);
+
   return (
     <div style={styles.modalBackdrop}>
       <div style={styles.modalContainer}>
