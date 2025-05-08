@@ -63,6 +63,9 @@ const Navbar = () => {
         <Link to="/shop" style={styles.navLink}>
           Shop
         </Link>
+        <Link to="/Customisation" style={styles.navLink}>
+        Customise
+        </Link>
         <Link to="/appointment" style={styles.navLink}>
           Appointment
         </Link>
