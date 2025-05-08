@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "../Components/Navbar";
+import { jwtDecode } from "jwt-decode";
 
 const Homepage = () => {
   // Inline styles
@@ -101,11 +102,21 @@ const Homepage = () => {
   };
 
   const navigate = useNavigate(); // Initialize navigate
-
   useEffect(() => {
     const token = localStorage.getItem("authToken");
+
     if (!token) {
-      navigate("/login"); // Redirect to /login if no token
+      navigate("/login");
+    } else {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded?.role === "Admin") {
+          navigate("/all-appointments");
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        navigate("/login");
+      }
     }
   }, [navigate]);
 

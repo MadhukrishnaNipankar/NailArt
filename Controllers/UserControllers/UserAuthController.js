@@ -58,8 +58,16 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { fullName, age, address, email, phoneNumber, username, password } =
-      req.body;
+    const {
+      fullName,
+      age,
+      address,
+      email,
+      phoneNumber,
+      username,
+      password,
+      role,
+    } = req.body;
 
     // Required fields check
     const missingFields = [];
@@ -98,8 +106,8 @@ exports.register = async (req, res) => {
       });
     }
 
-    // Create and save the user
-    await new User({
+    // Create user payload
+    const userData = {
       fullName,
       age,
       address,
@@ -107,7 +115,15 @@ exports.register = async (req, res) => {
       phoneNumber,
       username,
       password,
-    }).save();
+    };
+
+    // Add role only if present
+    if (role) {
+      userData.role = role;
+    }
+
+    // Save the user
+    await new User(userData).save();
 
     return res.status(201).json({
       error: false,
@@ -132,7 +148,6 @@ exports.register = async (req, res) => {
     });
   }
 };
-
 exports.changePassword = async (req, res) => {
   try {
     const { username, oldPassword, newPassword } = req.body;

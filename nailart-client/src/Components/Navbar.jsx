@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const [userRole, setUserRole] = useState(null);
   const authToken = localStorage.getItem("authToken");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (authToken) {
+      const decoded = jwtDecode(authToken);
+      setUserRole(decoded.role); // Set role in state
+    }
+  }, [authToken]);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    window.location.reload(); // Refresh the page after logout
+    navigate("/login"); // smooth redirect to login
   };
 
   const styles = {
@@ -54,21 +63,39 @@ const Navbar = () => {
     <header style={styles.header}>
       <div style={styles.logo}>NailedIt</div>
       <nav style={styles.nav}>
-        <Link to="/" style={styles.navLink}>
-          Home
-        </Link>
-        <Link to="/blogs" style={styles.navLink}>
-          Blogs
-        </Link>
-        <Link to="/shop" style={styles.navLink}>
-          Shop
-        </Link>
-        <Link to="/appointment" style={styles.navLink}>
-          Appointment
-        </Link>
-        <Link to="/orders" style={styles.navLink}>
-          Orders
-        </Link>
+        {/* User-only links */}
+        {userRole === "User" && (
+          <>
+            <Link to="/" style={styles.navLink}>
+              Home
+            </Link>
+            <Link to="/blogs" style={styles.navLink}>
+              Blogs
+            </Link>
+            <Link to="/shop" style={styles.navLink}>
+              Shop
+            </Link>
+            <Link to="/appointment" style={styles.navLink}>
+              Appointment
+            </Link>
+            <Link to="/orders" style={styles.navLink}>
+              My Orders
+            </Link>
+          </>
+        )}
+
+        {/* Admin-only links */}
+        {userRole === "Admin" && (
+          <>
+            <Link to="/all-appointments" style={styles.navLink}>
+              Appointments
+            </Link>
+            <Link to="/all-orders" style={styles.navLink}>
+              Orders
+            </Link>
+          </>
+        )}
+
         {/* Show Logout button only if user is logged in */}
         {authToken && (
           <button style={styles.logoutButton} onClick={handleLogout}>

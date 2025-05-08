@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AllOrders.css";
-import AdminNavbar from "../Components/AdminNavbar";
+import Navbar from "../Components/Navbar";
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,11 +12,14 @@ const AllOrders = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const res = await axios.get("http://localhost:5000/api/v1/order/orders/all", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        "http://localhost:5000/api/v1/order/orders/all",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setOrders(res.data.data);
     } catch (err) {
@@ -33,7 +36,7 @@ const AllOrders = () => {
 
   return (
     <>
-      <AdminNavbar />
+      <Navbar />
       <div className="admin-orders-container">
         <h2 className="orders-header">📦 All Orders</h2>
         {loading ? (
