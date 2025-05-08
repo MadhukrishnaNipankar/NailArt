@@ -61,7 +61,9 @@ const Navbar = () => {
 
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>NailedIt</div>
+      {userRole === "User" && <div style={styles.logo}>NailedIt</div>}
+      {userRole === "Admin" && <div style={styles.logo}>NailedIt Admin</div>}
+
       <nav style={styles.nav}>
         {/* User-only links */}
         {userRole === "User" && (
@@ -77,6 +79,9 @@ const Navbar = () => {
             </Link>
             <Link to="/appointment" style={styles.navLink}>
               Appointment
+            </Link>
+            <Link to="/customize" style={styles.navLink}>
+              Customize
             </Link>
             <Link to="/orders" style={styles.navLink}>
               My Orders

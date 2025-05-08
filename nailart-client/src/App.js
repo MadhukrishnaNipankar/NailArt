@@ -16,7 +16,7 @@ import AllAppointments from "./Pages/AllAppointments";
 import AllOrders from "./Pages/AllOrders";
 import AppointmentPage from "./Pages/AppointmentPage";
 import CustomerOrders from "./Pages/CustomerOrders";
-import CustomisationForm from "./Pages/CustomisationForm"
+import CustomisationForm from "./Pages/CustomisationForm";
 function App() {
   return (
     <Router>
@@ -32,7 +32,7 @@ function App() {
           <Route path="/all-appointments" element={<AllAppointments />} />
           <Route path="/all-orders" element={<AllOrders />} />
           <Route path="/orders" element={<CustomerOrders />} />
-          <Route path="/customisation" element={<CustomisationForm />} />
+          <Route path="/customize" element={<CustomisationForm />} />
           <Route path="/appointment" element={<AppointmentPage />} />
           <Route path="*" element={<h2>404 - Page Not Found 😢</h2>} />
         </Routes>
