@@ -60,7 +60,7 @@ const Modal = ({ product, onClose, onConfirm }) => {
 
         <div>
           <button onClick={onConfirm} style={styles.button}>
-            Confirm Order
+            Pay now
           </button>
           <button onClick={onClose} style={styles.closeButton}>
             Cancel

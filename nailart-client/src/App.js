@@ -17,6 +17,9 @@ import AllOrders from "./Pages/AllOrders";
 import AppointmentPage from "./Pages/AppointmentPage";
 import CustomerOrders from "./Pages/CustomerOrders";
 import CustomisationForm from "./Pages/CustomisationForm";
+import CustomisationList from "./Pages/CustomisationList";
+import PaymentSuccess from "./Components/PaymentSuccess"
+
 function App() {
   return (
     <Router>
@@ -32,8 +35,10 @@ function App() {
           <Route path="/all-appointments" element={<AllAppointments />} />
           <Route path="/all-orders" element={<AllOrders />} />
           <Route path="/orders" element={<CustomerOrders />} />
-          <Route path="/customize" element={<CustomisationForm />} />
+          <Route path="/all-customisation" element={<CustomisationList />} />
+          <Route path="/customisation" element={<CustomisationForm />} />
           <Route path="/appointment" element={<AppointmentPage />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="*" element={<h2>404 - Page Not Found 😢</h2>} />
         </Routes>
       </div>

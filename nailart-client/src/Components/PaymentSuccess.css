@@ -1,0 +1,56 @@
+/* src/components/PaymentSuccess.css */
+.payment-success-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe4ec, #fff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .success-icon {
+    font-size: 6rem;
+    color: #e91e63;
+    animation: pop 0.5s ease-out forwards;
+  }
+  
+  h1 {
+    color: #c2185b;
+    margin-top: 1rem;
+    font-size: 2.5rem;
+  }
+  
+  p {
+    color: #880e4f;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  @keyframes pop {
+    from {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .go-home-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-home-btn:hover {
+  background-color: #388e3c;
+}

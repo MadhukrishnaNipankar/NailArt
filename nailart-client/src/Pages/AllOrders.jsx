@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AllOrders.css";
-import Navbar from "../Components/Navbar";
+import AdminNavbar from "../Components/AdminNavbar";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -34,11 +37,45 @@ const AllOrders = () => {
     fetchOrders();
   }, []);
 
+  const handleDownloadExcel = () => {
+    const worksheetData = orders.map((order) => ({
+      "Order ID": order.orderId,
+      "Product Name": order.product.name,
+      "Product Cost": order.product.cost,
+      "Username": order.user.username,
+      "User Email": order.user.email,
+      "Phone Number": order.user.phoneNumber,
+      "Shipping Address": order.shippingAddress,
+      "Date & Time": new Date(order.createdAt).toLocaleString(),
+    }));
+  
+    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Orders");
+  
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+  
+    const file = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+  
+    saveAs(file, "All_Orders.xlsx");
+  };
+  
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <div className="admin-orders-container">
         <h2 className="orders-header">📦 All Orders</h2>
+        {!loading && !error && orders.length > 0 && (
+        <button className="download-btn" onClick={handleDownloadExcel}>
+          ⬇️ Download Excel
+        </button>
+        
+      )}
         {loading ? (
           <p className="loading">Loading...</p>
         ) : error ? (

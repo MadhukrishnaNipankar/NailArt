@@ -40,11 +40,48 @@ const CustomisationForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // You can handle actual form submit here
+  
+    const formPayload = new FormData();
+    formPayload.append("color", formData.color);
+    formPayload.append("shape", formData.shape);
+    formPayload.append("length", formData.length);
+    formPayload.append("image", formData.image);
+    formPayload.append("description", formData.description);
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/customization/", { // change URL if needed
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`, // if your protect middleware expects token
+        },
+        body: formPayload
+      });
+  
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Success:", data);
+        alert("Customisation submitted successfully!");
+        // Optionally reset form
+        setFormData({
+          color: "#ffffff",
+          shape: "",
+          length: "",
+          image: null,
+          description: ""
+        });
+        setImagePreview(null);
+      } else {
+        const errorData = await res.json();
+        console.error("Error:", errorData);
+        alert("Failed to submit customisation!");
+      }
+    } catch (err) {
+      console.error("Exception:", err);
+      alert("Something went wrong. Please try again.");
+    }
   };
+  
 
   return (
     <>

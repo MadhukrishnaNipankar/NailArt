@@ -60,6 +60,9 @@ const AdminNavbar = () => {
         <Link to="/all-orders" style={styles.navLink}>
           Orders
         </Link>
+        <Link to="/all-customisation" style={styles.navLink}>
+        Customisation
+        </Link>
         {/* Show Logout button only if user is logged in */}
         {authToken && (
           <button style={styles.logoutButton} onClick={handleLogout}>

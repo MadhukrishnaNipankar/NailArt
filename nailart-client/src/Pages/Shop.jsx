@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../Components/ProductCard";
 import Navbar from "../Components/Navbar";
+import PaymentSuccess from "../Components/PaymentSuccess" // Assuming you have a PaymentSuccess component
+import { useNavigate } from "react-router-dom";
 
 const categories = ["work", "vacation", "nailartsupplies", "festive", "casual"];
 
@@ -15,6 +17,8 @@ const Shop = () => {
   const [shippingAddress, setShippingAddress] = useState("");
   const [orderMessage, setOrderMessage] = useState("");
   const [orderError, setOrderError] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false); // New state to track payment success
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -98,6 +102,7 @@ const Shop = () => {
           setShowModal(false);
           setShippingAddress("");
           setOrderMessage("");
+          navigate("/payment-success");
         }, 2000);
       }
     } catch (error) {

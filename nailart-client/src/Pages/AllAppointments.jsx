@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AllAppointments.css";
-import Navbar from "../Components/Navbar";
+import * as XLSX from "xlsx";
+import AdminNavbar from "../Components/AdminNavbar";
 const AllAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,12 +42,31 @@ const AllAppointments = () => {
     return map[slot] || slot;
   };
 
+  const handleDownloadExcel = () => {
+    const data = appointments.map((appointment) => ({
+      "Full Name": appointment.user?.fullName || "Unnamed User",
+      Phone: appointment.user?.phoneNumber || "N/A",
+      Email: appointment.user?.email || "N/A",
+      "Appointment Date": new Date(appointment.dateOfAppointment).toLocaleDateString(),
+      "Time Slot": timeSlotToString(appointment.timeSlot),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Appointments");
+
+    XLSX.writeFile(workbook, "Appointments.xlsx");
+  };
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <div className="appointments-container">
         <h1 className="header">All Appointments</h1>
-
+        {appointments.length > 0 && (
+          <button className="download-btn" onClick={handleDownloadExcel}>
+            ⬇️ Download Excel
+          </button>
+        )}
         {loading ? (
           <div className="loading-text">Loading...</div>
         ) : error ? (
